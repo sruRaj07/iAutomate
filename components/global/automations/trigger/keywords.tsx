@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const Keywords = ({ id }: Props) => {
-  const { onValueChange, Keyword, onKeyPress, deleteMutation } = useKeywords(id)
+  const { onValueChange, keyword, onKeyPress, deleteMutation } = useKeywords(id)
   const { latestVariable } = useMutationDataState(['add-keyword'])
   const { data } = useQueryAutomation(id)
 
@@ -41,9 +41,9 @@ export const Keywords = ({ id }: Props) => {
         <Input
           placeholder="Add keyword..."
           style={{
-            width: Math.min(Math.max(Keyword.length || 10, 2), 50) + 'ch',
+            width: Math.min(Math.max(keyword.length || 10, 2), 50) + 'ch',
           }}
-          value={Keyword}
+          value={keyword}
           className="p-0 bg-transparent ring-0 border-none outline-none"
           onChange={onValueChange}
           onKeyUp={onKeyPress}
