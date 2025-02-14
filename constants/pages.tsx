@@ -1,45 +1,53 @@
-import { AutomationDuoToneBlue, ContactsDuoToneBlue, HomeDuoToneBlue, RocketDuoToneBlue, SettingsDuoToneWhite } from "@/icons"
-
-
+import {
+  AutomationDuoToneBlue,
+  ContactsDuoToneBlue,
+  HomeDuoToneBlue,
+  RocketDuoToneBlue,
+  SettingsDuoToneWhite,
+} from '@/icons'
 
 export const PAGE_BREAD_CRUMBS: string[] = [
-    'contacts',
-    'automations',
-    'integrations',
-    'settings',
+  'contacts',
+  'automations',
+  'integrations',
+  'settings',
 ]
 
 type Props = {
-    [page in string]: React.ReactNode
+  [page in string]: React.ReactNode
 }
 
 export const PAGE_ICON: Props = {
-    AUTOMATIONS: <AutomationDuoToneBlue />,
-    CONTACTS: <ContactsDuoToneBlue />,
-    INTEGRATIONS: <RocketDuoToneBlue />,
-    SETTINGS: <SettingsDuoToneWhite />,
-    HOME: <HomeDuoToneBlue />,
+  AUTOMATIONS: <AutomationDuoToneBlue />,
+  CONTACTS: <ContactsDuoToneBlue />,
+  INTEGRATIONS: <RocketDuoToneBlue />,
+  SETTINGS: <SettingsDuoToneWhite />,
+  HOME: <HomeDuoToneBlue />,
 }
 
 export const PLANS = [
-    {
-      name: "Free Plan",
-      price: "0",
-      description: "Perfect for getting started with Instagram automation",
-      features: ["Basic AI responses", "Limited auto tracking (100/month)", "Standard support", "Basic analytics"],
-    },
-    {
-      name: "Smart AI",
-      price: "49",
-      description: "Advanced features for serious Instagram growth",
-      features: [
-        "Advanced AI-powered responses",
-        "Unlimited auto tracking",
-        "Priority 24/7 support",
-        "Advanced analytics dashboard",
-        "Custom automation rules",
-        "Multi-account management",
-      ],
-      highlighted: true,
-    },
-  ]
+  {
+    name: 'Free Plan',
+    description: 'Perfect for getting started',
+    price: '$0',
+    features: [
+      'Boost engagement with target responses',
+      'Automate comment replies to enhance audience interaction',
+      'Turn followers into customers with targeted messaging',
+    ],
+    cta: 'Get Started',
+  },
+  {
+    name: 'Smart AI Plan',
+    description: 'Advanced features for power users',
+    price: '$99',
+    features: [
+      'All features from Free Plan',
+      'AI-powered response generation',
+      'Advanced analytics and insights',
+      'Priority customer support',
+      'Custom branding options',
+    ],
+    cta: 'Upgrade Now',
+  },
+]

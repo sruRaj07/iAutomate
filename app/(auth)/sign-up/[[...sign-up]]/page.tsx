@@ -1,14 +1,10 @@
 import { SignUp } from '@clerk/nextjs'
+import React from 'react'
 
+type Props = {}
 
-type Props={}
-
-const Page=(props:Props)=>{
-    return (
-    <div className="h-screen w-screen flex justify-center items-center">
-        <SignUp />
-    </div>
-   )
+const Page = (props: Props) => {
+  return <SignUp />
 }
 
 export default Page

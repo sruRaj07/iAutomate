@@ -56,7 +56,7 @@ export default function Home() {
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-[#4CAF50]" />
-            <span className="text-xl font-semibold text-white">Slide</span>
+            <span className="text-xl font-semibold text-white">iAutomate</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -112,6 +112,7 @@ export default function Home() {
               key={index}
               className="relative w-64 h-64 overflow-hidden rounded-lg transform hover:scale-105 transition-transform duration-300 shadow-lg shadow-black/20"
             >
+              {/* logo and image sections */}
               <Image
                 src={image.src || "/placeholder.svg"}
                 alt={image.alt}
