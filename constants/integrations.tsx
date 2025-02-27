@@ -1,5 +1,6 @@
 import { InstagramDuoToneBlue, SalesForceDuoToneBlue } from "@/icons"
 
+
 type Props = {
   title: string
   icon: React.ReactNode
@@ -11,7 +12,7 @@ export const INTEGRATION_CARDS: Props[] = [
   {
     title: 'Connect Instagram',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Mauris scelerisque tincidunt ultrices',
+      'One Click connect to Instagram',
     icon: <InstagramDuoToneBlue />,
     strategy: 'INSTAGRAM',
     
@@ -19,7 +20,7 @@ export const INTEGRATION_CARDS: Props[] = [
   {
     title: 'Connect Salesforce',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Mauris scelerisque tincidunt ultrices',
+      'One Click connect to Salesforce',
     icon: <SalesForceDuoToneBlue />,
     strategy: 'CRM',
   },

@@ -56,7 +56,7 @@ export default function Home() {
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-[#4CAF50]" />
-            <span className="text-xl font-semibold text-white">iAutomate</span>
+            <span className="text-xl font-semibold text-white">iMate</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -85,10 +85,10 @@ export default function Home() {
         {/* Hero Section */}
         <div className="py-20 md:py-32 text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white max-w-4xl mx-auto leading-tight bg-gradient-to-r from-[#4CAF50] to-[#81C784] bg-clip-text text-transparent">
-            Transform Your Instagram Engagement with Slide
+            Transform Your Instagram Engagement with iMate
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-            Slide revolutionizes how you connect with your audience on Instagram. Automate responses and boost
+            iMate revolutionizes how you connect with your audience on Instagram. Automate responses and boost
             engagement effortlessly, turning interactions into valuable business opportunities.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
