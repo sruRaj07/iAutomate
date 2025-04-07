@@ -17,25 +17,25 @@ export const BarDuoToneBlue = () => {
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M7 8C7.55228 8 8 8.44772 8 9V17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17V9C6 8.44772 6.44772 8 7 8Z"
-                fill="#768BDD"
+                fill="#4CAF50"
             />
             <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M11 14C11.5523 14 12 14.4477 12 15V17C12 17.5523 11.5523 18 11 18C10.4477 18 10 17.5523 10 17V15C10 14.4477 10.4477 14 11 14Z"
-                fill="#768BDD"
+                fill="#4CAF50"
             />
             <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M15 4C15.5523 4 16 4.44772 16 5V17C16 17.5523 15.5523 18 15 18C14.4477 18 14 17.5523 14 17V5C14 4.44772 14.4477 4 15 4Z"
-                fill="#768BDD"
+                fill="#4CAF50"
             />
             <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M19 10C19.5523 10 20 10.4477 20 11V17C20 17.5523 19.5523 18 19 18C18.4477 18 18 17.5523 18 17V11C18 10.4477 18.4477 10 19 10Z"
-                fill="#768BDD"
+                fill="#4CAF50"
             />
         </svg>
     )
