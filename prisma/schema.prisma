@@ -18,7 +18,7 @@ model User {
   clerkId      String         @unique
   email        String         @unique
   firstname    String?        @unique
-  lastname     String?        @unique
+  lastname     String?        // removed @unique
   createdAt    DateTime       @default(now())
   subscription Subscription?
   integrations Integrations[]
