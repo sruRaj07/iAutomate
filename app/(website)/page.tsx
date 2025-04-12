@@ -55,7 +55,8 @@ export default function Home() {
       <header className="container mx-auto px-4 py-6">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-[#4CAF50]" />
+            {/* <div className="h-8 w-8 rounded-lg bg-[#4CAF50]" /> */}
+            {/* <Image src="/images/logo.png" alt="logo" width={32} height={32} /> */}
             <span className="text-xl font-semibold text-white">iMate</span>
           </div>
 
