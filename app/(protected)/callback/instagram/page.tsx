@@ -9,11 +9,15 @@ type Props = {
 
 const Page = async ({ searchParams: { code } }: Props) => {
   if (code) {
-    console.log(code)
-    const user = await onIntegrate(code.split('#_')[0])
-    if (user.status === 200) {
+    const response = await fetch(
+      `/api/webhook/instagram?code=${code.split('#_')[0]}`,
+      { method: 'GET' }
+    )
+    const result = await response.json()
+
+    if (response.ok) {
       return redirect(
-        `/dashboard/${user.data?.firstname}${user.data?.lastname}/integrations`
+        `/dashboard/${result.data.firstname}${result.data.lastname}/integrations`
       )
     }
   }
