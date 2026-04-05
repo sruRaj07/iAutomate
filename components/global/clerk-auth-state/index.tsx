@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  ClerkLoading,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkLoading, Show, SignInButton, UserButton } from '@clerk/nextjs'
 import { User } from 'lucide-react'
 import Loader from '../loader'
 import { Button } from '@/components/ui/button'
@@ -20,7 +14,7 @@ const ClerkAuthState = (props: Props) => {
           <></>
         </Loader>
       </ClerkLoading>
-      <SignedOut>
+      <Show when="signed-out">
         <SignInButton>
           <Button
             className="rounded-xl 
@@ -33,8 +27,8 @@ const ClerkAuthState = (props: Props) => {
             Login
           </Button>
         </SignInButton>
-      </SignedOut>
-      <SignedIn>
+      </Show>
+      <Show when="signed-in">
         <UserButton>
           <UserButton.UserProfileLink
             label="Dashboard"
@@ -42,7 +36,7 @@ const ClerkAuthState = (props: Props) => {
             labelIcon={<User size={16} />}
           />
         </UserButton>
-      </SignedIn>
+      </Show>
     </>
   )
 }

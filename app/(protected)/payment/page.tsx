@@ -3,13 +3,15 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     session_id?: string
     cancel?: boolean
-  }
+  }>
 }
 
-const Page = async ({ searchParams: { cancel, session_id } }: Props) => {
+const Page = async ({ searchParams }: Props) => {
+  const { cancel, session_id } = await searchParams
+
   if (session_id) {
     const customer = await onSubscribe(session_id)
 
@@ -33,6 +35,8 @@ const Page = async ({ searchParams: { cancel, session_id } }: Props) => {
       </div>
     )
   }
+
+  return redirect('/dashboard')
 }
 
 export default Page

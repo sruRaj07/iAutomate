@@ -13,11 +13,11 @@ import {
   
   type Props = {
     children: React.ReactNode
-    params: { slug: string }
+    params: Promise<{ slug: string }>
   }
   
   const Layout = async ({ children, params }: Props) => {
-    
+    const { slug } = await params
   
     const query = new QueryClient()
   
@@ -28,7 +28,7 @@ import {
     return (
       <HydrationBoundary state={dehydrate(query)}>
         <div className="p-3">
-          <Sidebar slug={params.slug} />
+          <Sidebar slug={slug} />
           <div
             className="
         lg:ml-[250px] 
@@ -39,7 +39,7 @@ import {
         overflow-auto
         "
           >
-            <InfoBar slug={params.slug} />
+            <InfoBar slug={slug} />
             {children}
           </div>
         </div>

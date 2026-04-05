@@ -2,26 +2,28 @@ import { onIntegrate } from '@/actions/integrations'
 import { redirect } from 'next/navigation'
 
 type Props = {
-  searchParams: {
-    code: string
-  }
+  searchParams: Promise<{
+    code?: string
+    error?: string
+  }>
 }
 
-const Page = async ({ searchParams: { code } }: Props) => {
-  if (code) {
-    const response = await fetch(
-      `/api/webhook/instagram?code=${code.split('#_')[0]}`,
-      { method: 'GET' }
-    )
-    const result = await response.json()
+const Page = async ({ searchParams }: Props) => {
+  const { code } = await searchParams
 
-    if (response.ok) {
+  if (code) {
+    const result = await onIntegrate(code.split('#_')[0])
+
+    if (result?.status === 200 && result.data) {
+      const dashboardSlug = `${result.data.firstname ?? ''}${result.data.lastname ?? ''}`
+
       return redirect(
-        `/dashboard/${result.data.firstname}${result.data.lastname}/integrations`
+        `/dashboard/${dashboardSlug}/integrations`
       )
     }
   }
-  return redirect('/sign-up')
+
+  return redirect('/dashboard')
 }
 
 export default Page

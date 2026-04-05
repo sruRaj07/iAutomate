@@ -1,14 +1,31 @@
 import { client } from '@/lib/prisma'
 
 export const matchKeyword = async (keyword: string) => {
-  return await client.keyword.findFirst({
+  const normalizedKeyword = keyword.trim().toLowerCase()
+
+  if (!normalizedKeyword) {
+    return null
+  }
+
+  const keywords = await client.keyword.findMany({
     where: {
-      word: {
-        equals: keyword,
-        mode: 'insensitive',
+      Automation: {
+        active: true,
       },
     },
+    select: {
+      id: true,
+      word: true,
+      automationId: true,
+    },
   })
+
+  return (
+    keywords
+      .sort((a, b) => b.word.length - a.word.length)
+      .find((item) => normalizedKeyword.includes(item.word.trim().toLowerCase())) ||
+    null
+  )
 }
 
 export const getKeywordAutomation = async (
@@ -25,6 +42,11 @@ export const getKeywordAutomation = async (
       trigger: {
         where: {
           type: dm ? 'DM' : 'COMMENT',
+        },
+      },
+      posts: {
+        select: {
+          postid: true,
         },
       },
       listener: true,
@@ -110,12 +132,20 @@ export const getChatHistory = async (sender: string, reciever: string) => {
     },
     orderBy: { createdAt: 'asc' },
   })
+
+  if (history.length === 0) {
+    return {
+      history: [],
+      automationId: null,
+    }
+  }
+
   const chatSession: {
     role: 'assistant' | 'user'
     content: string
   }[] = history.map((chat) => {
     return {
-      role: chat.reciever ? 'assistant' : 'user',
+      role: chat.senderId === sender ? 'assistant' : 'user',
       content: chat.message!,
     }
   })

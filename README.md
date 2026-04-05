@@ -37,3 +37,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 We have Successfully completed all the features . 
+
+
+## if you ru it again with ngrok new URL
+
+instagram webhook and call back set up 
+environment variables changes
+cross origin allow in .mjs file config

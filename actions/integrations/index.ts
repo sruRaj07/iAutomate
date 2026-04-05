@@ -6,9 +6,33 @@ import { createIntegration, getIntegration } from './queries'
 import { generateTokens } from '@/lib/fetch'
 import axios from 'axios'
 
-export const onOAuthInstagram = (strategy: 'INSTAGRAM' | 'CRM') => {
+export const onOAuthInstagram = async (strategy: 'INSTAGRAM' | 'CRM') => {
   if (strategy === 'INSTAGRAM') {
-    return redirect(process.env.INSTAGRAM_EMBEDDED_OAUTH_URL as string)
+    const host = process.env.NEXT_PUBLIC_HOST_URL as string
+    const clientId = process.env.INSTAGRAM_CLIENT_ID as string
+    const authUrl = new URL(
+      process.env.INSTAGRAM_EMBEDDED_OAUTH_URL ||
+        'https://www.instagram.com/oauth/authorize'
+    )
+
+    authUrl.searchParams.set('client_id', clientId)
+    authUrl.searchParams.set('redirect_uri', `${host}/callback/instagram`)
+    authUrl.searchParams.set('response_type', 'code')
+    authUrl.searchParams.set(
+      'scope',
+      authUrl.searchParams.get('scope') ||
+        'instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish,instagram_business_manage_insights'
+    )
+    authUrl.searchParams.set(
+      'enable_fb_login',
+      authUrl.searchParams.get('enable_fb_login') || '0'
+    )
+    authUrl.searchParams.set(
+      'force_authentication',
+      authUrl.searchParams.get('force_authentication') || '1'
+    )
+
+    return redirect(authUrl.toString())
   }
 }
 
