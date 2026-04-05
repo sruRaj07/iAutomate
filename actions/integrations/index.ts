@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { onCurrentUser } from '../user'
-import { createIntegration, getIntegration } from './queries'
+import { createIntegration, deleteIntegration, getIntegration } from './queries'
 import { generateTokens } from '@/lib/fetch'
 import axios from 'axios'
 
@@ -47,8 +47,8 @@ export const onIntegrate = async (code: string) => {
       console.log(token)
 
       if (token) {
-        const insta_id = await axios.get(
-          `${process.env.INSTAGRAM_BASE_URL}/me?fields=user_id&access_token=${token.access_token}`
+        const instagramProfile = await axios.get(
+          `${process.env.INSTAGRAM_BASE_URL}/me?fields=user_id,username&access_token=${token.access_token}`
         )
 
         const today = new Date()
@@ -57,7 +57,11 @@ export const onIntegrate = async (code: string) => {
           user.id,
           token.access_token,
           new Date(expire_date),
-          insta_id.data.user_id
+          {
+            id: instagramProfile.data.user_id,
+            username: instagramProfile.data.username,
+            displayName: instagramProfile.data.username,
+          }
         )
         return { status: 200, data: create }
       }
@@ -69,5 +73,24 @@ export const onIntegrate = async (code: string) => {
   } catch (error) {
     console.log('🔴 500', error)
     return { status: 500 }
+  }
+}
+
+export const onDisconnectIntegration = async (
+  strategy: 'INSTAGRAM'
+) => {
+  const user = await onCurrentUser()
+
+  try {
+    const deleted = await deleteIntegration(user.id, strategy)
+
+    if (deleted.count > 0) {
+      return { status: 200, data: `${strategy} disconnected successfully` }
+    }
+
+    return { status: 404, data: 'Integration not found' }
+  } catch (error) {
+    console.log('🔴 disconnect error', error)
+    return { status: 500, data: 'Failed to disconnect integration' }
   }
 }

@@ -35,7 +35,12 @@ export const createIntegration = async (
   clerkId: string,
   token: string,
   expire: Date,
-  igId?: string
+  integration?: {
+    id?: string
+    username?: string
+    displayName?: string
+    avatarUrl?: string
+  }
 ) => {
   return await client.user.update({
     where: {
@@ -46,13 +51,27 @@ export const createIntegration = async (
         create: {
           token,
           expiresAt: expire,
-          instagramId: igId,
+          instagramId: integration?.id,
+          instagramUsername: integration?.username,
+          instagramDisplayName: integration?.displayName,
+          instagramAvatarUrl: integration?.avatarUrl,
         },
       },
     },
     select: {
       firstname: true,
       lastname: true,
+    },
+  })
+}
+
+export const deleteIntegration = async (clerkId: string, name: 'INSTAGRAM') => {
+  return await client.integrations.deleteMany({
+    where: {
+      name,
+      User: {
+        clerkId,
+      },
     },
   })
 }

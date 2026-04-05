@@ -14,25 +14,27 @@ import {
   XAxis,
 } from 'recharts'
 
-type Props = {}
-
-const chartData = [
-  { month: 'January', desktop: 86 },
-  { month: 'February', desktop: 50 },
-  { month: 'March', desktop: 37 },
-  { month: 'April', desktop: 73 },
-  { month: 'May', desktop: 29 },
-  { month: 'June', desktop: 14 },
-]
+type Props = {
+  chartData: {
+    month: string
+    engagement: number
+    posts: number
+    replies: number
+  }[]
+}
 
 const chartConfig = {
-  desktop: {
-    label: 'Desktop',
+  engagement: {
+    label: 'Engagement',
     color: 'hsl(var(--chart-1))',
+  },
+  replies: {
+    label: 'Replies',
+    color: 'hsl(var(--chart-2))',
   },
 }
 
-const Chart = (props: Props) => {
+const Chart = ({ chartData }: Props) => {
   return (
     <Card className="border-none p-0">
       <CardContent className="p-0">
@@ -55,18 +57,24 @@ const Chart = (props: Props) => {
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
               />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="line" />}
               />
               <Area
-                dataKey="desktop"
+                dataKey="engagement"
                 type="natural"
-                fill="var(--color-desktop)"
+                fill="var(--color-engagement)"
                 fillOpacity={0.4}
-                stroke="var(--color-desktop)"
+                stroke="var(--color-engagement)"
+              />
+              <Area
+                dataKey="replies"
+                type="natural"
+                fill="var(--color-replies)"
+                fillOpacity={0.18}
+                stroke="var(--color-replies)"
               />
             </AreaChart>
           </ChartContainer>
