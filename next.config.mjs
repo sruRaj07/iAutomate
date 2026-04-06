@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ['1247-116-73-72-55.ngrok-free.app'],
+  allowedDevOrigins: ['i-automate.vercel.app'],
   turbopack: {
     root: process.cwd(),
   },
