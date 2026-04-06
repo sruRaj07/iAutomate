@@ -1,9 +1,12 @@
 'use client'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { useAutomationPosts } from '@/hooks/use-automations'
 import { useQueryAutomation } from '@/hooks/user-queries'
 import { InstagramBlue, Warning } from '@/icons'
 import Image from 'next/image'
 import React from 'react'
+import PostButton from '.'
 
 type Props = {
   id: string
@@ -11,6 +14,7 @@ type Props = {
 
 const PostNode = ({ id }: Props) => {
   const { data } = useQueryAutomation(id)
+  const { clearPosts, isDeleting } = useAutomationPosts(id)
 
   return (
     data?.data &&
@@ -48,6 +52,18 @@ const PostNode = ({ id }: Props) => {
               </div>
             ))}
           </div>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <PostButton id={id} />
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => clearPosts({})}
+            disabled={isDeleting}
+            className="rounded-2xl border-red-500/30 bg-red-500/10 text-red-200 hover:bg-red-500/15 hover:text-red-100"
+          >
+            {isDeleting ? 'Removing...' : 'Remove Posts'}
+          </Button>
         </div>
       </div>
     )

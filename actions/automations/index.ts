@@ -4,13 +4,17 @@ import { onCurrentUser } from '../user'
 import { findUser } from '../user/queries'
 import {
   addKeyWord,
-  addListener,
-  addPost,
-  addTrigger,
+  deleteAutomationQuery,
   createAutomation,
   deleteKeywordQuery,
+  deleteListenerQuery,
+  deletePostsQuery,
+  deleteTriggerQuery,
   findAutomation,
   getAutomations,
+  replaceListener,
+  replacePosts,
+  replaceTrigger,
   updateAutomation,
 } from './queries'
 
@@ -77,7 +81,7 @@ export const saveListener = async (
 ) => {
   await onCurrentUser()
   try {
-    const create = await addListener(autmationId, listener, prompt, reply)
+    const create = await replaceListener(autmationId, listener, prompt, reply)
     if (create) return { status: 200, data: 'Listener created' }
     return { status: 404, data: 'Cant save listener' }
   } catch (error) {
@@ -88,7 +92,7 @@ export const saveListener = async (
 export const saveTrigger = async (automationId: string, trigger: string[]) => {
   await onCurrentUser()
   try {
-    const create = await addTrigger(automationId, trigger)
+    const create = await replaceTrigger(automationId, trigger)
     if (create) return { status: 200, data: 'Trigger saved' }
     return { status: 404, data: 'Cannot save trigger' }
   } catch (error) {
@@ -152,7 +156,7 @@ export const savePosts = async (
 ) => {
   await onCurrentUser()
   try {
-    const create = await addPost(autmationId, posts)
+    const create = await replacePosts(autmationId, posts)
 
     if (create) return { status: 200, data: 'Posts attached' }
 
@@ -172,6 +176,48 @@ export const activateAutomation = async (id: string, state: boolean) => {
         data: `Automation ${state ? 'activated' : 'disabled'}`,
       }
     return { status: 404, data: 'Automation not found' }
+  } catch (error) {
+    return { status: 500, data: 'Oops! something went wrong' }
+  }
+}
+
+export const deleteAutomation = async (id: string) => {
+  await onCurrentUser()
+  try {
+    const deleted = await deleteAutomationQuery(id)
+    if (deleted) return { status: 200, data: 'Automation deleted' }
+    return { status: 404, data: 'Automation not found' }
+  } catch (error) {
+    return { status: 500, data: 'Oops! something went wrong' }
+  }
+}
+
+export const deleteListener = async (automationId: string) => {
+  await onCurrentUser()
+  try {
+    const deleted = await deleteListenerQuery(automationId)
+    if (deleted) return { status: 200, data: 'Listener removed' }
+    return { status: 404, data: 'Listener not found' }
+  } catch (error) {
+    return { status: 500, data: 'Oops! something went wrong' }
+  }
+}
+
+export const deleteTrigger = async (automationId: string) => {
+  await onCurrentUser()
+  try {
+    await deleteTriggerQuery(automationId)
+    return { status: 200, data: 'Trigger removed' }
+  } catch (error) {
+    return { status: 500, data: 'Oops! something went wrong' }
+  }
+}
+
+export const deletePosts = async (automationId: string) => {
+  await onCurrentUser()
+  try {
+    await deletePostsQuery(automationId)
+    return { status: 200, data: 'Posts detached' }
   } catch (error) {
     return { status: 500, data: 'Oops! something went wrong' }
   }

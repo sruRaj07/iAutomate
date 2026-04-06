@@ -14,11 +14,12 @@ const Items = ({ page, slug }: Props) => {
       key={item.id}
       href={`/dashboard/${slug}/${item.label === 'home' ? '/' : item.label}`}
       className={cn(
-        'capitalize flex gap-x-2 rounded-full p-3',
-        page === item.label && 'bg-[#0f0f0f]',
+        'capitalize flex items-center gap-x-3 rounded-2xl px-4 py-3 transition duration-150',
+        page === item.label &&
+          'bg-[#1b120d] text-white shadow-[inset_0_0_0_1px_rgba(239,125,50,0.28)]',
         page === slug && item.label === 'home'
-          ? 'bg-[#0f0f0f]'
-          : 'text-[#9B9CA0]'
+          ? 'bg-[#1b120d] text-white shadow-[inset_0_0_0_1px_rgba(239,125,50,0.28)]'
+          : 'text-zinc-400 hover:bg-white/5 hover:text-white'
       )}
     >
       {item.icon}

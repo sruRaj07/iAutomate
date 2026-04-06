@@ -18,7 +18,7 @@ const PostButton = ({ id }: Props) => {
   const { posts, onSelectPost, mutate, isPending } = useAutomationPosts(id)
 
   return (
-    <TriggerButton label="Attach a post">
+    <TriggerButton label="Attach or Edit Posts">
       {data?.status === 200 ? (
         <div className="flex flex-col gap-y-3 w-full">
           <div className="flex flex-wrap w-full gap-3">
@@ -71,7 +71,7 @@ const PostButton = ({ id }: Props) => {
           <Button
             onClick={mutate}
             disabled={posts.length === 0}
-            className="bg-gradient-to-br w-full from-[#3352CC] font-medium text-white to-[#1C2D70]"
+            className="orange-gradient w-full font-medium text-white"
           >
             <Loader state={isPending}>Attach Post</Loader>
           </Button>

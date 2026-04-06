@@ -51,17 +51,17 @@ const IntegrationCard = ({ description, icon, strategy, title }: Props) => {
     integrated?.instagramDisplayName || integrated?.instagramUsername || title
 
   return (
-    <div className="border-2 border-[#3352CC] rounded-2xl gap-x-5 p-5 flex items-center justify-between">
+    <div className="dashboard-panel rounded-[1.75rem] gap-x-5 p-5 flex items-center justify-between">
       {icon}
       <div className="flex flex-col flex-1">
-        <h3 className="text-xl"> {title}</h3>
-        <p className="text-[#9D9D9D] text-base ">{description}</p>
+        <h3 className="text-xl text-white"> {title}</h3>
+        <p className="text-zinc-400 text-base ">{description}</p>
       </div>
       {integrated && strategy === 'INSTAGRAM' ? (
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <p className="text-sm font-medium text-white">Connected</p>
-            <p className="text-xs text-[#9D9D9D]">
+            <p className="text-sm font-medium text-[#ffb36a]">Connected</p>
+            <p className="text-xs text-zinc-400">
               @{integrated.instagramUsername || 'instagram'}
             </p>
           </div>
@@ -69,20 +69,20 @@ const IntegrationCard = ({ description, icon, strategy, title }: Props) => {
             <PopoverTrigger asChild>
               <button
                 type="button"
-                className="rounded-full ring-2 ring-[#3352CC] transition hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-[#3352CC]/30"
+                className="rounded-full ring-2 ring-[#ef7d32] transition hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-[#ef7d32]/30"
               >
                 <Avatar className="h-14 w-14">
                   <AvatarImage
                     src={integrated.instagramAvatarUrl || undefined}
                     alt={profileLabel}
                   />
-                  <AvatarFallback className="bg-gradient-to-br from-[#3352CC] to-[#1C2D70] text-white">
+                  <AvatarFallback className="orange-gradient text-white">
                     {getInitials(profileLabel)}
                   </AvatarFallback>
                 </Avatar>
               </button>
             </PopoverTrigger>
-            <PopoverContent className="border-[#3352CC]/30 bg-[#111111] text-white">
+            <PopoverContent className="dashboard-panel border-white/10 bg-[#110d0a]/95 text-white">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-12 w-12">
@@ -90,16 +90,16 @@ const IntegrationCard = ({ description, icon, strategy, title }: Props) => {
                       src={integrated.instagramAvatarUrl || undefined}
                       alt={profileLabel}
                     />
-                    <AvatarFallback className="bg-gradient-to-br from-[#3352CC] to-[#1C2D70] text-white">
+                    <AvatarFallback className="orange-gradient text-white">
                       {getInitials(profileLabel)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="space-y-1">
                     <p className="text-sm font-semibold">{profileLabel}</p>
-                    <p className="text-xs text-[#9D9D9D]">
+                    <p className="text-xs text-zinc-400">
                       @{integrated.instagramUsername || 'instagram'}
                     </p>
-                    <p className="text-xs text-[#9D9D9D]">
+                    <p className="text-xs text-zinc-400">
                       ID: {integrated.instagramId || 'Unavailable'}
                     </p>
                   </div>
@@ -121,7 +121,7 @@ const IntegrationCard = ({ description, icon, strategy, title }: Props) => {
         <Button
           onClick={onInstaOAuth}
           disabled={integrated?.name === strategy}
-          className="bg-gradient-to-br text-white rounded-full text-lg from-[#3352CC] font-medium to-[#1C2D70] hover:opacity-70 transition duration-100"
+          className="orange-gradient text-white rounded-full text-lg font-medium hover:opacity-90 transition duration-100 shadow-[0_18px_40px_rgba(239,125,50,0.22)]"
         >
           {integrated ? 'Connected' : 'Connect'}
         </Button>

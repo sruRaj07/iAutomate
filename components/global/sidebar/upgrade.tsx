@@ -5,13 +5,13 @@ type Props = {}
 
 const UpgradeCard = (props: Props) => {
   return (
-    <div className="bg-[#252525] p-3 rounded-2xl flex flex-col gap-y-3">
-      <span className="text-sm">
+    <div className="dashboard-panel rounded-[1.5rem] p-4 flex flex-col gap-y-3">
+      <span className="text-sm text-white">
         Upgrade to {''}
         <span
           className="bg-gradient-to-r 
-        from-[#CC3BD4] 
-        to-[#D064AC] 
+        from-[#ef7d32] 
+        to-[#ffb36a] 
         font-bold 
         bg-clip-text 
         text-transparent"
@@ -19,7 +19,7 @@ const UpgradeCard = (props: Props) => {
           Smart AI
         </span>
       </span>
-      <p className="text-[#9B9CA0] font-light text-sm">
+      <p className="text-zinc-400 font-light text-sm">
         Unlock all features <br /> including AI and more
       </p>
       <PaymentButton />

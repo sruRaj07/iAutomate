@@ -7,7 +7,7 @@ import ReactQueryProvider from '@/providers/react-query-provider'
 import ReduxProvider from '@/providers/redux-provider'
 
 export const metadata: Metadata = {
-  title: 'iMate',
+  title: 'imate',
   description: 'Automate DMs and comments on instagram',
 }
 

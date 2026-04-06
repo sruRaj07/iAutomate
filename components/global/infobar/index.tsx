@@ -27,7 +27,7 @@ const InfoBar = ({ slug }: Props) => {
 
   return (
     currentPage && (
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-5">
         <div className="flex gap-x-3 lg:gap-x-5 justify-end">
           <span className="lg:hidden flex items-center flex-1 gap-x-2">
             <Sheet
@@ -35,9 +35,15 @@ const InfoBar = ({ slug }: Props) => {
               className="lg:hidden"
               side="left"
             >
-              <div className="flex flex-col gap-y-5 w-full h-full p-3 bg-[#0e0e0e] bg-opacity-90 bg-clip-padding backdrop-filter backdrop--blur__safari backdrop-blur-3xl">
-                <div className="flex gap-x-2 items-center p-5 justify-center">
+              <div className="dashboard-shell flex flex-col gap-y-5 w-full h-full p-3 bg-[#0e0c0a]/90 bg-clip-padding backdrop-filter backdrop--blur__safari backdrop-blur-3xl">
+                <div className="flex gap-x-3 items-center p-5 justify-center">
                   <LogoSmall />
+                  <div className="flex flex-col">
+                    <p className="text-xs uppercase tracking-[0.28em] text-[#ffb36a]">
+                      imate
+                    </p>
+                    <p className="text-xs text-zinc-400">Control center</p>
+                  </div>
                 </div>
                 <div className="flex flex-col py-3">
                   <Items
@@ -48,17 +54,17 @@ const InfoBar = ({ slug }: Props) => {
                 <div className="px-16">
                   <Separator
                     orientation="horizontal"
-                    className="bg-[#333336]"
+                    className="bg-white/10"
                   />
                 </div>
                 <div className="px-3 flex flex-col gap-y-5">
                   <div className="flex gap-x-2">
                     <ClerkAuthState />
-                    <p className="text-[#9B9CA0]">Profile</p>
+                    <p className="text-zinc-400">Profile</p>
                   </div>
                   <div className="flex gap-x-3">
                     <HelpDuoToneWhite />
-                    <p className="text-[#9B9CA0]">Help</p>
+                    <p className="text-zinc-400">Help</p>
                   </div>
                 </div>
                 <SubscriptionPlan type="FREE">

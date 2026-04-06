@@ -4,6 +4,9 @@ import { useQueryAutomation } from '@/hooks/user-queries'
 import { PlaneBlue, SmartAi, Warning } from '@/icons'
 import React from 'react'
 import PostButton from '../post'
+import ThenAction from './then-action'
+import { Button } from '@/components/ui/button'
+import { useListener } from '@/hooks/use-automations'
 
 type Props = {
   id: string
@@ -11,6 +14,7 @@ type Props = {
 
 const ThenNode = ({ id }: Props) => {
   const { data } = useQueryAutomation(id)
+  const { removeListener, isRemoving } = useListener(id)
   const commentTrigger = data?.data?.trigger.find((t) => t.type === 'COMMENT')
 
   return !data?.data?.listener ? (
@@ -45,6 +49,23 @@ const ThenNode = ({ id }: Props) => {
         <p className="flont-light text-text-secondary">
           {data.data.listener.prompt}
         </p>
+        {data.data.listener.commentReply && (
+          <p className="text-sm text-zinc-400">
+            Comment reply: {data.data.listener.commentReply}
+          </p>
+        )}
+      </div>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <ThenAction id={id} />
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => removeListener({})}
+          disabled={isRemoving}
+          className="rounded-2xl border-red-500/30 bg-red-500/10 text-red-200 hover:bg-red-500/15 hover:text-red-100"
+        >
+          {isRemoving ? 'Removing...' : 'Remove Effect'}
+        </Button>
       </div>
       {data.data.posts.length > 0 ? (
         <></>

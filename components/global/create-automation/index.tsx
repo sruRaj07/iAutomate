@@ -17,7 +17,7 @@ const CreateAutomation = (props: Props) => {
 
   return (
     <Button
-      className="lg:px-10 py-6 bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[#3352CC] font-medium to-[#1C2D70]"
+      className="lg:px-10 py-6 orange-gradient hover:opacity-90 text-white rounded-full font-medium shadow-[0_18px_40px_rgba(239,125,50,0.28)]"
       onClick={() =>
         mutate({
           name: 'Untitled',

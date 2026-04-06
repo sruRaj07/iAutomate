@@ -73,49 +73,40 @@ export const updateAutomation = async (
   })
 }
 
-export const addListener = async (
+export const replaceListener = async (
   automationId: string,
   listener: 'SMARTAI' | 'MESSAGE',
   prompt: string,
   reply?: string
 ) => {
-  return await client.automation.update({
+  return await client.listener.upsert({
     where: {
-      id: automationId,
+      automationId,
     },
-    data: {
-      listener: {
-        create: {
-          listener,
-          prompt,
-          commentReply: reply,
-        },
-      },
+    update: {
+      listener,
+      prompt,
+      commentReply: reply || null,
+    },
+    create: {
+      automationId,
+      listener,
+      prompt,
+      commentReply: reply || null,
     },
   })
 }
 
-export const addTrigger = async (automationId: string, trigger: string[]) => {
-  if (trigger.length === 2) {
-    return await client.automation.update({
-      where: { id: automationId },
-      data: {
-        trigger: {
-          createMany: {
-            data: [{ type: trigger[0] }, { type: trigger[1] }],
-          },
-        },
-      },
-    })
-  }
+export const replaceTrigger = async (automationId: string, trigger: string[]) => {
   return await client.automation.update({
     where: {
       id: automationId,
     },
     data: {
       trigger: {
-        create: {
-          type: trigger[0],
+        deleteMany: {},
+        createMany: {
+          data: trigger.map((type) => ({ type })),
         },
       },
     },
@@ -162,6 +153,62 @@ export const addPost = async (
           data: posts,
         },
       },
+    },
+  })
+}
+
+export const replacePosts = async (
+  autmationId: string,
+  posts: {
+    postid: string
+    caption?: string
+    media: string
+    mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
+  }[]
+) => {
+  return await client.automation.update({
+    where: {
+      id: autmationId,
+    },
+    data: {
+      posts: {
+        deleteMany: {},
+        createMany: {
+          data: posts,
+        },
+      },
+    },
+  })
+}
+
+export const deleteListenerQuery = async (automationId: string) => {
+  return await client.listener.delete({
+    where: {
+      automationId,
+    },
+  })
+}
+
+export const deleteTriggerQuery = async (automationId: string) => {
+  return await client.trigger.deleteMany({
+    where: {
+      automationId,
+    },
+  })
+}
+
+export const deletePostsQuery = async (automationId: string) => {
+  return await client.post.deleteMany({
+    where: {
+      automationId,
+    },
+  })
+}
+
+export const deleteAutomationQuery = async (automationId: string) => {
+  return await client.automation.delete({
+    where: {
+      id: automationId,
     },
   })
 }

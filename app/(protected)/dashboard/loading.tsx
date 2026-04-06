@@ -5,7 +5,7 @@ type Props = {}
 
 const Loading = (props: Props) => {
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="dashboard-shell h-screen flex justify-center items-center">
       <Loader state>...Loading</Loader>
     </div>
   )
