@@ -24,12 +24,19 @@ export const Keywords = ({ id }: Props) => {
           data?.data?.keywords.length > 0 &&
           data?.data?.keywords.map(
             (word) =>
-              word.id !== latestVariable.variables.id && (
+              word.id !== latestVariable?.variables?.id && (
                 <div
                   className="bg-background-90 flex items-center gap-x-2 capitalize text-text-secondary py-1 px-4 rounded-full"
                   key={word.id}
                 >
                   <p>{word.word}</p>
+                  <button
+                    type="button"
+                    onClick={() => deleteMutation({ id: word.id })}
+                    className="text-zinc-400 hover:text-white transition"
+                  >
+                    <X size={14} />
+                  </button>
                 </div>
               )
           )}

@@ -1,5 +1,4 @@
 import { useListener } from '@/hooks/use-automations'
-import React from 'react'
 import TriggerButton from '../trigger-button'
 import { AUTOMATION_LISTENERS } from '@/constants/automation'
 import { SubscriptionPlan } from '../../subscription-plan'
@@ -18,8 +17,13 @@ const ThenAction = ({ id }: Props) => {
     onSetListener,
     listener: Listener,
     onFormSubmit,
-    register,
+    prompt,
+    reply,
+    onPromptChange,
+    onReplyChange,
     isPending,
+    removeListener,
+    isRemoving,
   } = useListener(id)
 
   return (
@@ -36,8 +40,8 @@ const ThenAction = ({ id }: Props) => {
                 key={listener.id}
                 className={cn(
                   Listener === listener.type
-                    ? 'bg-gradient-to-br from-[#3352CC] to-[#1C2D70]'
-                    : 'bg-background-80',
+                    ? 'orange-gradient'
+                    : 'dashboard-panel-muted',
                   'p-3 rounded-xl flex flex-col gap-y-2 cursor-pointer hover:opacity-80 transition duration-100'
                 )}
               >
@@ -54,8 +58,8 @@ const ThenAction = ({ id }: Props) => {
               key={listener.id}
               className={cn(
                 Listener === listener.type
-                  ? 'bg-gradient-to-br from-[#3352CC] to-[#1C2D70]'
-                  : 'bg-background-80',
+                  ? 'orange-gradient'
+                  : 'dashboard-panel-muted',
                 'p-3 rounded-xl flex flex-col gap-y-2 cursor-pointer hover:opacity-80 transition duration-100'
               )}
             >
@@ -77,17 +81,32 @@ const ThenAction = ({ id }: Props) => {
                 ? 'Add a prompt that your smart ai can use...'
                 : 'Add a message you want send to your customers'
             }
-            {...register('prompt')}
-            className="bg-background-80 outline-none border-none ring-0 focus:ring-0"
+            value={prompt}
+            onChange={(event) => onPromptChange(event.target.value)}
+            className="dashboard-panel-muted outline-none border-none ring-0 focus:ring-0"
           />
           <Input
-            {...register('reply')}
+            value={reply}
+            onChange={(event) => onReplyChange(event.target.value)}
             placeholder="Add a reply for comments (Optional)"
-            className="bg-background-80 outline-none border-none ring-0 focus:ring-0"
+            className="dashboard-panel-muted outline-none border-none ring-0 focus:ring-0"
           />
-          <Button className="bg-gradient-to-br w-full from-[#3352CC] font-medium text-white to-[#1C2D70]">
-            <Loader state={isPending}>Add listener</Loader>
+          <Button className="orange-gradient w-full font-medium text-white">
+            <Loader state={isPending}>
+              {Listener ? 'Save listener' : 'Add listener'}
+            </Loader>
           </Button>
+          {Listener && (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => removeListener({})}
+              disabled={isRemoving}
+              className="border-red-500/30 bg-red-500/10 text-red-200 hover:bg-red-500/15 hover:text-red-100"
+            >
+              {isRemoving ? 'Removing...' : 'Remove listener'}
+            </Button>
+          )}
         </form>
       </div>
     </TriggerButton>

@@ -1,6 +1,5 @@
 'use client'
 import { useQueryAutomation } from '@/hooks/user-queries'
-import React from 'react'
 import ActiveTrigger from './active'
 import { Separator } from '@/components/ui/separator'
 import ThenAction from '../then/then-action'
@@ -11,13 +10,15 @@ import { cn } from '@/lib/utils'
 import Keywords from './keywords'
 import { Button } from '@/components/ui/button'
 import Loader from '../../loader'
+import { Trash2 } from 'lucide-react'
 
 type Props = {
   id: string
 }
 
 const Trigger = ({ id }: Props) => {
-  const { types, onSetTrigger, onSaveTrigger, isPending } = useTriggers(id)
+  const { types, onSetTrigger, onSaveTrigger, isPending, clearTrigger, isDeleting } =
+    useTriggers(id)
   const { data } = useQueryAutomation(id)
 
   if (data?.data && data?.data?.trigger.length > 0) {
@@ -46,6 +47,52 @@ const Trigger = ({ id }: Props) => {
           </>
         )}
 
+        <div className="w-full flex flex-col gap-4 mt-4">
+          <Keywords id={id} />
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <TriggerButton label="Edit Trigger">
+              <div className="flex flex-col gap-y-2">
+                {AUTOMATION_TRIGGERS.map((trigger) => (
+                  <div
+                    key={trigger.id}
+                    onClick={() => onSetTrigger(trigger.type)}
+                    className={cn(
+                      'hover:opacity-80 text-white rounded-xl flex cursor-pointer flex-col p-3 gap-y-2',
+                      !types?.find((t) => t === trigger.type)
+                        ? 'dashboard-panel-muted'
+                        : 'orange-gradient font-medium'
+                    )}
+                  >
+                    <div className="flex gap-x-2 items-center">
+                      {trigger.icon}
+                      <p className="font-bold">{trigger.label}</p>
+                    </div>
+                    <p className="text-sm font-light">{trigger.description}</p>
+                  </div>
+                ))}
+                <Button
+                  onClick={onSaveTrigger}
+                  disabled={types?.length === 0}
+                  className="orange-gradient font-medium text-white"
+                >
+                  <Loader state={isPending}>Save Trigger</Loader>
+                </Button>
+              </div>
+            </TriggerButton>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => clearTrigger({})}
+              disabled={isDeleting}
+              className="rounded-2xl border-red-500/30 bg-red-500/10 text-red-200 hover:bg-red-500/15 hover:text-red-100"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              {isDeleting ? 'Removing...' : 'Remove Trigger'}
+            </Button>
+          </div>
+        </div>
+
         {!data.data.listener && <ThenAction id={id} />}
       </div>
     )
@@ -60,8 +107,8 @@ const Trigger = ({ id }: Props) => {
             className={cn(
               'hover:opacity-80 text-white rounded-xl flex cursor-pointer flex-col p-3 gap-y-2',
               !types?.find((t) => t === trigger.type)
-                ? 'bg-background-80'
-                : 'bg-gradient-to-br from-[#3352CC] font-medium to-[#1C2D70]'
+                ? 'dashboard-panel-muted'
+                : 'orange-gradient font-medium'
             )}
           >
             <div className="flex gap-x-2 items-center">
@@ -75,7 +122,7 @@ const Trigger = ({ id }: Props) => {
         <Button
           onClick={onSaveTrigger}
           disabled={types?.length === 0}
-          className="bg-gradient-to-br from-[#3352CC] font-medium text-white to-[#1C2D70]"
+          className="orange-gradient font-medium text-white"
         >
           <Loader state={isPending}>Create Trigger</Loader>
         </Button>

@@ -20,14 +20,11 @@ const Sidebar = ({ slug }: Props) => {
     <div
       className="w-[250px] 
     border-[1px]
-    radial 
     fixed 
     left-0 
     lg:inline-block
-    border-[#545454] 
-    bg-gradient-to-b from-[#768BDD] 
-    via-[#171717]
-     to-[#768BDD] 
+    border-white/10 
+    bg-[linear-gradient(180deg,rgba(239,125,50,0.22)_0%,rgba(22,17,13,0.96)_10%,rgba(9,9,9,0.98)_100%)] 
      hidden 
      bottom-0 
      top-0 
@@ -41,15 +38,20 @@ const Sidebar = ({ slug }: Props) => {
        w-full 
        h-full 
        p-3 
-       bg-[#0e0e0e] 
-       bg-opacity-90 
+       bg-[#0e0c0a]/85 
        bg-clip-padding 
        backdrop-filter 
        backdrop--blur__safari 
        backdrop-blur-3xl"
       >
-        <div className="flex gap-x-2 items-center p-5 justify-center">
+        <div className="flex gap-x-3 items-center p-5 justify-center">
           <LogoSmall />
+          <div className="flex flex-col">
+            <p className="text-xs uppercase tracking-[0.28em] text-[#ffb36a]">
+              imate
+            </p>
+            <p className="text-xs text-zinc-400">Control center</p>
+          </div>
         </div>
         <div className="flex flex-col py-3">
           <Items
@@ -60,17 +62,17 @@ const Sidebar = ({ slug }: Props) => {
         <div className="px-16">
           <Separator
             orientation="horizontal"
-            className="bg-[#333336]"
+            className="bg-white/10"
           />
         </div>
         <div className="px-3 flex flex-col gap-y-5">
           <div className="flex gap-x-2">
             <ClerkAuthState />
-            <p className="text-[#9B9CA0]">Profile</p>
+            <p className="text-zinc-400">Profile</p>
           </div>
           <div className="flex gap-x-3">
             <HelpDuoToneWhite />
-            <p className="text-[#9B9CA0]">Help</p>
+            <p className="text-zinc-400">Help</p>
           </div>
         </div>
         <SubscriptionPlan type="FREE">

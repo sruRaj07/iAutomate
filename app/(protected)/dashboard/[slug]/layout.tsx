@@ -25,17 +25,19 @@ import {
   
     await PrefetchUserAutomations(query)
   
-    return (
+  return (
       <HydrationBoundary state={dehydrate(query)}>
-        <div className="p-3">
+        <div className="dashboard-shell p-3">
           <Sidebar slug={slug} />
           <div
             className="
+        relative z-10
         lg:ml-[250px] 
         lg:pl-10 
         lg:py-5 
         flex 
         flex-col 
+        gap-y-6
         overflow-auto
         "
           >
