@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { createUser, findUser, updateSubscription } from './queries'
 import { refreshToken } from '@/lib/fetch'
 import { updateIntegration } from '../integrations/queries'
-import { stripe } from '@/lib/stripe'
+import { getStripeClient } from '@/lib/stripe'
 
 export const onCurrentUser = async () => {
   const user = await currentUser()
@@ -81,6 +81,7 @@ export const onUserInfo = async () => {
 export const onSubscribe = async (session_id: string) => {
   const user = await onCurrentUser()
   try {
+    const stripe = getStripeClient()
     const session = await stripe.checkout.sessions.retrieve(session_id)
     if (session) {
       const subscribed = await updateSubscription(user.id, {

@@ -1,3 +1,11 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_CLIENT_SECRET as string)
+export const getStripeClient = () => {
+  const secretKey = process.env.STRIPE_CLIENT_SECRET
+
+  if (!secretKey) {
+    throw new Error('STRIPE_CLIENT_SECRET is not configured')
+  }
+
+  return new Stripe(secretKey)
+}
