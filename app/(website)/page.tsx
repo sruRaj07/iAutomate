@@ -197,6 +197,8 @@ export default function Home() {
                       src={image.src}
                       alt={image.alt}
                       fill
+                      priority={index === 0}
+                      loading={index === 0 ? 'eager' : 'lazy'}
                       className="object-cover transition duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
@@ -236,7 +238,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="features" className="relative z-10 mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-16">
+      <section
+        id="features"
+        className="perf-section relative z-10 mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-16"
+      >
         <div className="mb-10 max-w-2xl">
           <p className="text-sm uppercase tracking-[0.25em] text-[#ffb36a]">
             Feature Layer
@@ -268,7 +273,7 @@ export default function Home() {
 
       <section
         id="analytics"
-        className="relative z-10 mx-auto grid max-w-7xl gap-6 px-4 py-10 md:px-8 md:py-16 lg:grid-cols-[0.9fr_1.1fr]"
+        className="perf-section relative z-10 mx-auto grid max-w-7xl gap-6 px-4 py-10 md:px-8 md:py-16 lg:grid-cols-[0.9fr_1.1fr]"
       >
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
           <p className="text-sm uppercase tracking-[0.25em] text-[#ffb36a]">
@@ -325,7 +330,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="pricing" className="relative z-10 mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+      <section
+        id="pricing"
+        className="perf-section relative z-10 mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20"
+      >
         <div className="mb-12 text-center">
           <p className="text-sm uppercase tracking-[0.25em] text-[#ffb36a]">
             Pricing

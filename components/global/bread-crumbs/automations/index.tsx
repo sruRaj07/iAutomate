@@ -1,6 +1,5 @@
 'use client'
 import { ChevronRight, Loader2, PencilIcon, Trash2 } from 'lucide-react'
-import React from 'react'
 import ActivateAutomationButton from '../../activate-automation-button'
 import { useQueryAutomation } from '@/hooks/user-queries'
 import { useDeleteAutomation, useEditAutomation } from '@/hooks/use-automations'
@@ -33,7 +32,7 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
   const { latestVariable } = useMutationDataState(['update-automation'])
 
   return (
-    <div className="dashboard-panel rounded-[1.5rem] w-full p-5 flex items-center gap-4">
+    <div className="dashboard-panel rounded-3xl w-full p-5 flex items-center gap-4">
       <div className="flex items-center gap-x-3 min-w-0">
         <p className="text-zinc-400 truncate">Automations</p>
         <ChevronRight
@@ -85,7 +84,7 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
                 disabled={isDeleting}
                 className="relative overflow-hidden rounded-full border border-red-400/20 bg-red-500/10 p-2 text-red-300 transition hover:bg-red-500/15 disabled:cursor-not-allowed disabled:opacity-80"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-140%] animate-[marquee_1.8s_linear_infinite]" />
+                <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent translate-x-[-140%] animate-[marquee_1.8s_linear_infinite]" />
                 {isDeleting ? (
                   <Loader2 className="relative h-4 w-4 animate-spin" />
                 ) : (

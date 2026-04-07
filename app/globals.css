@@ -180,7 +180,9 @@
 }
 
 .hero-orb {
-  filter: blur(14px);
+  filter: blur(10px);
+  will-change: transform;
+  transform: translateZ(0);
   animation: hero-float 10s ease-in-out infinite;
 }
 
@@ -195,6 +197,7 @@
 .reveal-up {
   opacity: 0;
   transform: translateY(20px);
+  will-change: transform, opacity;
   animation: reveal-up 0.8s ease forwards;
 }
 
@@ -215,11 +218,19 @@
 }
 
 .pulse-border {
+  will-change: box-shadow;
   animation: pulse-border 2.8s ease-in-out infinite;
 }
 
 .marquee-track {
+  will-change: transform;
+  transform: translateZ(0);
   animation: marquee 24s linear infinite;
+}
+
+.perf-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
 }
 
 .dashboard-shell {
@@ -248,7 +259,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 24px 90px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(16px);
 }
 
 .dashboard-panel-muted {
@@ -291,5 +302,36 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-orb {
+    animation-duration: 16s;
+    filter: blur(8px);
+    opacity: 0.6;
+  }
+
+  .marquee-track {
+    animation-duration: 36s;
+  }
+
+  .dashboard-panel {
+    backdrop-filter: blur(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  .hero-orb,
+  .reveal-up,
+  .pulse-border,
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
